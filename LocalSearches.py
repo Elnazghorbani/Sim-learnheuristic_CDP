@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Jan  4 11:43:23 2024
 
-@author: eghorbanioskalaei
-"""
 
 from Solution import *
 import random
