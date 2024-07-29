@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jan  2 20:00:54 2024
 
-@author: eghorbanioskalaei
-"""
 
 
 import math
@@ -675,11 +670,7 @@ class ConstructiveHeuristic:
     Size: Size of a list
     beta: Beta parameter of the Geometric distribution
     '''
-    # why we used geometry distribution? why we didn't pick the number randomly? because we want a biased selection. but why we don't select the first element of the list instead of geometry distribution?
-    #A smaller beta value might lead to more exploration (selecting positions randomly), while a larger beta value could bias the selection towards positions with higher probabilities.
 
-    #p(x=k)= p.(1-p)^k-1  beta is the parameter of the geometry distribution (p), and 'size' is the size of the set 
-    #that we're gonna chose a number in that
     # Function to get a random position with bias
     def getRandomPosition(self, size, random, beta): 
         # Calculate a random floating-point number between 0 and 1
