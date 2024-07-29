@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Jan  6 16:54:59 2024
 
-@author: eghorbanioskalaei
-"""
 
 import sys
 from Instance import Instance
