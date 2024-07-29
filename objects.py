@@ -62,13 +62,6 @@ class Test:
         self.inversa = float(inversa)
 
 
-
-#class Probability:
-#    ALWAYS_1 = "always_prob_1"
-#    EXPONENTIAL = "decreasing_probability_exponencial"
-#    LINEAR = "zero_at_t_max_decreasing_probability"
-
-
         
 class BlackBox:
     def __init__(self, beta_0, beta_1, beta_2, beta_3):
@@ -80,10 +73,10 @@ class BlackBox:
 
     def __init__(self):
         self.n = 1
-        self.beta_0 = 0.01 #0.005
-        self.beta_1 = -0.7 # Random value between 0 and 4
-        self.beta_2 = 0.8  # Random value between 0 and 4
-        self.beta_3 = 1.0  # Random value between 0 and 4    
+        self.beta_0 = 0.01 
+        self.beta_1 = -0.7 
+        self.beta_2 = 0.8  
+        self.beta_3 = 1.0     
 
         
  
@@ -98,16 +91,9 @@ class BlackBox:
         self.n = 1        
 
 
-    # def setter_betas(self, beta_0=0, beta_1=1, beta_2=0.3, beta_3=0.5):
-    #     self.beta_0 = beta_0
-    #     self.beta_1 = beta_1
-    #     self.beta_2 = beta_2
-    #     self.beta_3 = beta_3
-    #     self.n = len(beta_0)
+
 
     def get_value(self, cap_node =0, weather=0, congestion=0):
-        #open_type_value = sum([i * j for i, j in zip(self.beta_1, open_type)])
-        #open_type_value = sum([self.beta_1 * j for j in open_type])
         cap_node_value = self.beta_0 * cap_node
         weather_value = self.beta_2 * weather
         congestion_value = self.beta_3 * congestion
@@ -118,13 +104,7 @@ class BlackBox:
         return 1 / (1 + math.exp(-exponent))
 
 
-    # def get_value_with_list(self, node_type, list_of_data):
-    #     open_type_value = sum([i * j for i, j in zip(self.beta_1, list_of_data[0:self.n - 1])])
-    #     weather_value = self.beta_2[node_type] * list_of_data[self.n - 1]
-    #     congestion_value = self.beta_3[node_type] * list_of_data[self.n]
-    #     exponent = self.beta_0[node_type] + weather_value + open_type_value + congestion_value
 
-    #     return 1 / (1 + math.exp(-exponent))
 
     def simulate(self, cap_node= 0, weather=0, congestion=0, verbose=False):
         rand = random.random()
@@ -141,68 +121,20 @@ class BlackBox:
                 print("Node capacity is not lost")
             return 1
 
-    # def simulate_list(self, list_of_data):
-    #     output = []
-    #     for list in list_of_data:
-    #         rand = random.random()
-    #         node_type, data = list[0], list[1:]
-    #         if rand > self.get_value_with_list(node_type, data):
-    #             output.append(0)
-    #         else:
-    #             output.append(1)
-
-    #     return output
-
-    # def get_value_with_dict(self, dict_of_data):
-    #     node_type = dict_of_data["node_type"]
-    #     open_type_value = sum([i * j for i, j in zip(self.beta_1, dict_of_data["open_type"])])
-    #     weather_value = self.beta_2[node_type] * dict_of_data["weather"]
-    #     congestion_value = self.beta_3[node_type] * dict_of_data["congestion"]
-    #     exponent = self.beta_0[node_type] + weather_value + open_type_value + congestion_value
-    #     # Negativo = bueno
-    #     if -exponent > 100:
-    #         exponent = -100
-    #     return 1 / (1 + math.exp(-exponent))
-
-    # def simulate_dict(self, dict_of_data):
-    #     output = []
-    #     for list in dict_of_data:
-    #         rand = random.random()
-    #         if rand > self.get_value_with_dict(list):
-    #             output.append(0)
-    #         else:
-    #             output.append(1)
-
-    #     return output
-
-    # def print_beta(self):
-    #     for i in range(self.n):
-    #         print("\n")
-    #         print("Para el tipo de nodo " + str(i) + ":")
-    #         print("Beta_0: " + str(self.beta_0[i]) + " correspondiente al término independiente")
-    #         print("Beta_1: " + str(self.beta_1) + " correspondiente al término que acompaña al open_type")
-    #         print("Beta_2: " + str(self.beta_2[i]) + " correspondiente al término que acompaña al weather")
-    #         print("Beta_3: " + str(self.beta_3[i]) + " correspondiente al término que acompaña al congestion")
-    #         print("\n")
-
 
 class WhiteBox:
     def __init__(self):
         self.n = 1
         self.beta_0 = 0
-        self.beta_1 = 0  # Random value between 0 and 4
-        self.beta_2 = 0 # Random value between 0 and 4
-        self.beta_3 = 0 # Random value between 0 and 4   
+        self.beta_1 = 0  
+        self.beta_2 = 0 
+        self.beta_3 = 0  
         self.data = []
 
 
 
 
     def get_value(self, cap_node=0, weather=0, congestion=0):
-        #print("beta_0:", self.beta_0)
-        #print("beta_1:", self.beta_1)
-        #print("beta_2:", self.beta_2)
-        #print("beta_3:", self.beta_3)
         #open_type_value = sum([self.beta_1 * j for j in open_type])
         cap_node_value = self.beta_0 * cap_node
         weather_value = self.beta_2 * weather
@@ -216,8 +148,6 @@ class WhiteBox:
 
     def get_value_with_dict(self, cap_node, dict_values):
 
-        #node_type = dict_values["node_type"]
-        #open_type = dict_values["open_type"]
         weather = dict_values["weather"]
         congestion = dict_values["congestion"]
      
@@ -245,66 +175,12 @@ class WhiteBox:
                 print("No se pierde la capacidad del nodo")
             return 1
 
-    # def simulate_dict(self, dict_values, verbose=False):
-    #     rand = random.random()
-
-    #     node_type = dict_values["node_type"]
-    #     open_type = dict_values["open_type"]
-    #     weather = dict_values["weather"]
-    #     congestion = dict_values["congestion"]
-
-    #     if verbose:
-    #         print("La probabilidad de la white box ha dado: " + str(
-    #             self.get_value(node_type, open_type, weather, congestion)))
-    #         print("Y el número aleatorio ha dado: " + str(rand))
-
-    #     if rand > self.get_value(node_type, open_type, weather, congestion):
-    #         if verbose:
-    #             print("Se pierde la capacidad del nodo")
-    #         return 0
-    #     else:
-    #         if verbose:
-    #             print("No se pierde la capacidad del nodo")
-    #         return 1
-
-    # def simulate_dict_list(self, dict_list, verbose=False):
-    #     output = []
-    #     for single_dict in dict_list:
-    #         output.append(self.simulate_dict(single_dict, verbose))
-
-    #     return output
 
     def add_data(self, cap_node, weather, congestion, variable):
         dato = [cap_node] + [weather] + [congestion] + [variable]
         self.data.append(dato)
         
-    # def add_data_in_list(self, list_of_data: list):
-    #     """
-    #     :param list_of_data:
-    #                         1º value: node_type
-    #                         2º value: array of open_type N^n
-    #                         3º value: weather value 1 or 0
-    #                         4º value: congestion value 1 or 0
-    #                         5º value: variable value 1 or 0
-    #     :return:
-    #     """
-    #     if isinstance(list_of_data, Iterable) and not isinstance(list_of_data, str):
-    #         if all(isinstance(sub_obj, Iterable) for sub_obj in list_of_data):
-    #             for lista in list_of_data:
-    #                 node_type = lista[0]
-    #                 self.data[node_type].append(lista[1:])
-    #         else:
-    #             node_type = list_of_data[0]
-    #             self.data[node_type].append(list_of_data[1:])
-    #     else:
-    #         print("WTF, me has pasado '" + list_of_data + "'. Espabila niño, que te la vida te va a comer")
-
-    # def add_data_in_dict(self, dict_of_data: list):
-    #     for data in dict_of_data:
-    #         node_type = data["node_type"]
-    #         dato = data["open_type"] + [data["weather"]] + [data["congestion"]] + [data["variable"]]
-    #         self.data[node_type].append(dato)
-
+    
     def fit(self, fit_function):
         fit_function()
 
@@ -334,19 +210,6 @@ class WhiteBox:
 
 
 
-    # def fit_logistic_for_each_type(self):
-    #         if len(self.data) >= 2:
-    #             x, y = zip(*([[data[:-1], data[-1]] for data in self.data]))
-    #             if len(set(y)) != 1:
-    #                 log_reg = LogisticRegression(max_iter=1000)
-    #                 log_reg.fit(x, y)
-    #                 coef = log_reg.coef_[0]
-    #                 intercept = log_reg.intercept_[0]
-    #                 self.beta_1 = coef[0:len(coef) - 1]
-    #                 self.beta_1, self.beta_2, self.beta_3 = intercept, coef[-1], coef[-1]
-
-
-
     def fit_logistic(self):
         if len(self.data) >= 2:
             x, y = zip(*([[data[:-1], data[-1]] for data in self.data]))
@@ -358,39 +221,7 @@ class WhiteBox:
                 
                 self.beta_1, self.beta_0, self.beta_2, self.beta_3 = intercept, coef[-1], coef[-1], coef[-1]
 
-
-
-    # def fit_logistic(self):
-    #     result = [[[data[:-1], data[-1]] for data in self.data[j]] for j in self.data if self.data[j] != []]
-    #     x, y = zip(*[(sublist[0], sublist[1]) for inner_list in result for sublist in inner_list])
-    #     log_reg = LogisticRegression()
-    #     if len(set(y)) != 1:
-    #         log_reg.fit(x, y)
-    #         intercept = log_reg.intercept_[0]
-    #         coef = log_reg.coef_[0]
-    #         self.beta_0 = {i: intercept for i in range(self.n)}
-    #         self.beta_1 = {i: coef[0:self.n] for i in range(self.n)}
-    #         self.beta_2 = {i: coef[self.n] for i in range(self.n)}
-    #         self.beta_3 = {i: coef[-1] for i in range(self.n)}
-
-    # def print_beta(self):
-    #     for i in range(self.n):
-    #         print("\n")
-    #         print("Para el tipo de nodo " + str(i) + ":")
-    #         print("Beta_1: " + str(self.beta_1[i]) + " correspondiente al término independiente")
-    #         print("Beta_2: " + str(self.beta_2[i]) + " correspondiente al término que acompaña al weather")
-    #         print("Beta_3: " + str(self.beta_3[i]) + " correspondiente al término que acompaña al congestion")
-    #         print("\n")
- 
-    
- 
-
-
-
-    
-    
-
-
+  
 def plot_heat_map(bb: BlackBox, output_name, cap_node):
     # Initialize plot
     fig, ax = plt.subplots(figsize=(10, 8))
@@ -427,28 +258,13 @@ def plot_heat_map(bb: BlackBox, output_name, cap_node):
     
     plt.close(fig)
 
-
-
-
-
-
-
 def plot_wit_some_betas():
     beta0 = 0.01
     beta1 = -0.7
     beta2 = 0.8
     beta3 = 1.0
-    #beta0 = 0.01
-    #beta1 = -1.5
-    #beta2 = 1.5
-    #beta3 = 1
     cap_node = 100
     blackbox = BlackBox()
     blackbox.setter_betas(beta0, beta1, beta2, beta3)
     plot_heat_map(blackbox, "1.png", cap_node)
-
-
-
-
-
 
