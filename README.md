@@ -1,0 +1,1 @@
+In this code the sim-learnheuristic algorithm to solve the capacitated dispersion problem(CDP) has been provided. This algorithm is a combination of machine learning with a biased randomized-based methodology to solve the dynamic and stochastic CDP.
